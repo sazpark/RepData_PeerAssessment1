@@ -25,15 +25,12 @@ for (i in 1:ndays) {
 }
 ```
 
-Slide 2
-=======
-
 
 ```r
 hist(StepsPerDay, breaks=10)
 ```
 
-![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3-1.png) 
+![plot of chunk unnamed-chunk-3](assets/fig/unnamed-chunk-3-1.png) 
 
 ```r
 summary(StepsPerDay)
@@ -62,7 +59,7 @@ FiveMinuteInterval <- 1:nintervals
 plot(FiveMinuteInterval,StepsPerInterval[FiveMinuteInterval],type="l")
 ```
 
-![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png) 
+![plot of chunk unnamed-chunk-4](assets/fig/unnamed-chunk-4-1.png) 
 
 The 104rd 5-minute interval, on average across all the 
 days in the dataset, contains the maximum number of steps (1.0927 &times; 10<sup>4</sup>).
@@ -122,6 +119,9 @@ levels(activity$weekend)[levels(activity$weekend)=="TRUE"] <- "weekend"
 levels(activity$weekend)[levels(activity$weekend)=="FALSE"] <- "weekday"
 ```
 
+
+
+```r
 weekday_segments <- which(activity$weekend=="weekday")
 weekend_segments <- which(activity$weekend=="weekend")
 
@@ -144,6 +144,13 @@ for (i in 1:nintervals_weekday) {
 
 FiveMinuteIntervalWeekend <- 1:nintervals_weekend
 plot(FiveMinuteIntervalWeekend,StepsPerIntervalWeekend[FiveMinuteIntervalWeekend],type="l")
+```
+
+![plot of chunk unnamed-chunk-8](assets/fig/unnamed-chunk-8-1.png) 
+
+```r
 FiveMinuteIntervalWeekday <- 1:nintervals_weekday
 plot(FiveMinuteIntervalWeekday,StepsPerIntervalWeekday[FiveMinuteIntervalWeekday],type="l")
+```
 
+![plot of chunk unnamed-chunk-8](assets/fig/unnamed-chunk-8-2.png) 

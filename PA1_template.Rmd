@@ -88,6 +88,8 @@ levels(activity$weekend)[levels(activity$weekend)=="TRUE"] <- "weekend"
 levels(activity$weekend)[levels(activity$weekend)=="FALSE"] <- "weekday"
 ```
 
+
+```{r}
 weekday_segments <- which(activity$weekend=="weekday")
 weekend_segments <- which(activity$weekend=="weekend")
 
@@ -112,4 +114,4 @@ FiveMinuteIntervalWeekend <- 1:nintervals_weekend
 plot(FiveMinuteIntervalWeekend,StepsPerIntervalWeekend[FiveMinuteIntervalWeekend],type="l")
 FiveMinuteIntervalWeekday <- 1:nintervals_weekday
 plot(FiveMinuteIntervalWeekday,StepsPerIntervalWeekday[FiveMinuteIntervalWeekday],type="l")
-
+```
