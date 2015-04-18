@@ -23,9 +23,6 @@ for (i in 1:ndays) {
 }
 ```
 
-Slide 2
-=======
-
 ```{r}
 hist(StepsPerDay, breaks=10)
 summary(StepsPerDay)
