@@ -8,12 +8,14 @@ output:
 
 ## Loading and preprocessing the data
 
-```{r}
+
+```r
 unzip("activity.zip", exdir = "activity_data")
 activity <- read.csv("activity_data/activity.csv")
 ```
 
-```{r}
+
+```r
 activity$date <- as.Date(activity$date, format = "%Y-%m-%d")
 unique_dates <- unique(activity$date)
 ndays <- length(unique_dates)
@@ -26,18 +28,30 @@ for (i in 1:ndays) {
 Slide 2
 =======
 
-```{r}
+
+```r
 hist(StepsPerDay, breaks=10)
+```
+
+![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3-1.png) 
+
+```r
 summary(StepsPerDay)
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##       0    6778   10400    9354   12810   21190
 ```
 
 ## What is mean total number of steps taken per day?
 
-The mean number of steps taken per day is `r round(mean(StepsPerDay, na.rm=TRUE))`.
+The mean number of steps taken per day is 9354.
 
 ## What is the average daily activity pattern?
 
-```{r}
+
+```r
 unique_intervals <- unique(activity$interval)
 nintervals <- length(unique_intervals)
 StepsPerInterval <- numeric(nintervals)
@@ -48,19 +62,23 @@ FiveMinuteInterval <- 1:nintervals
 plot(FiveMinuteInterval,StepsPerInterval[FiveMinuteInterval],type="l")
 ```
 
-The `r which(StepsPerInterval==max(StepsPerInterval))`rd 5-minute interval, on average across all the 
-days in the dataset, contains the maximum number of steps (`r max(StepsPerInterval)`).
+![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png) 
+
+The 104rd 5-minute interval, on average across all the 
+days in the dataset, contains the maximum number of steps (1.0927 &times; 10<sup>4</sup>).
 
 ## Imputing missing values
 
-```{r}
+
+```r
 ok <- complete.cases(activity)
 ```
 
-The number of rows with NAs is: `r sum(!ok)`.
+The number of rows with NAs is: 2304.
 
 We will fill in the 5-minute intervals that have NA values with the mean value for the day.
-```{r}
+
+```r
 nimpute <- sum(!ok)
 impute_indeces <- which(is.na(activity$steps))
 for (i in 1:nimpute) {
@@ -75,6 +93,11 @@ for (i in 1:ndays) {
 
 summary(StepsPerDayImputed)
 ```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##       0    6778   10400    9354   12810   21190
+```
 It doesn't appear to make a difference (apparently when there is a 5-minute interval missing, the
 data for the entire day are missing)
 
@@ -82,8 +105,16 @@ data for the entire day are missing)
 ## Are there differences in activity patterns between weekdays and weekends?
 
 
-```{r}
+
+```r
 require(lubridate)
+```
+
+```
+## Loading required package: lubridate
+```
+
+```r
 activity$day = ifelse(wday(activity$date)==1,7,wday(activity$date)-1)
 
 activity$weekend <- factor(activity$day>4)
